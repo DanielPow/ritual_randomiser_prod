@@ -1536,12 +1536,8 @@
       }
     }
 
-    /* Taller desktop screens - increase top/bottom spacing 1.5x */
+    /* Taller desktop screens - increase top/bottom spacing */
     @media (min-height: 900px) and (min-width: 1028px) {
-      :root {
-        --font-large: 66px;
-      }
-
       body {
         padding-top: 48px;
         padding-bottom: 48px;
@@ -1579,6 +1575,15 @@
       }
     }
 
+    /* Larger screens - scale fonts up */
+    @media (min-width: 1500px) and (min-height: 900px) {
+      :root {
+        --font-large: 88px;
+        --font-medium: 53px;
+        --font-small: 53px;
+        --font-ui: 36px;
+      }
+    }
   </style>
 </head>
 <body>
