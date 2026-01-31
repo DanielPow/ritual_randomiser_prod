@@ -75,10 +75,10 @@
     /* Reduce fonts another 5% for short viewports */
     @media (max-height: 600px) {
       :root {
-        --font-large: clamp(30px, 8vw, 84px);
+        --font-large: clamp(30px, 8vw, 50px);
         --font-medium: clamp(30px, 8vw, 50px);
-        --font-small: clamp(26px, 6.3vw, 50px);
-        --font-ui: clamp(18px, 4.5vw, 34px);
+        --font-small: clamp(26px, 6.3vw, 40px);
+        --font-ui: clamp(18px, 4.5vw, 32px);
       }
     }
 
@@ -290,8 +290,8 @@
 
     /* Base styles for round (circular) buttons */
     .btn-round {
-      width: 66px;
-      height: 66px;
+      width: 50px;
+      height: 50px;
       background: rgba(45, 45, 45, 0.25);
       border: none;
       border-radius: 50%;
@@ -307,14 +307,14 @@
     }
 
     .btn-round svg {
-      max-width: 70%;
-      width: 100%;
+      width: 24px;
+      height: 24px;
     }
 
       @media (max-width: 600px) {
         .btn-round {
-          width: 48px;
-          height: 48px;
+          width: 63px;
+          height: 63px;
         }
       }
 
@@ -331,11 +331,11 @@
 
     /* Base styles for pill (rounded rectangle) buttons */
     .btn-pill {
-      height: 66px;
-      padding: 0 33px;
+      height: 50px;
+      padding: 0 25px;
       background: rgba(45, 45, 45, 0.25);
       border: none;
-      border-radius: 33px;
+      border-radius: 25px;
       color: white;
       font-size: var(--font-btn);
       font-family: "Helvetica Neue", Arial, sans-serif;
@@ -351,7 +351,8 @@
 
      @media (max-width: 600px) {
         .btn-pill {
-          height: 44px;
+          height: 63px;
+          border-radius: 31.5px;
         }
       }
 
@@ -465,14 +466,14 @@
 
     .save-button{
       background-color: rgba(245, 245, 245, 0.2);
-      width: 66px;
-      height: 66px;
+      width: 50px;
+      height: 50px;
     }
 
     @media (max-width: 600px) {
       .save-button {
-        width: 48px;
-        height: 48px;
+        width: 63px;
+        height: 63px;
       }
     }
 
@@ -977,7 +978,7 @@
     }
 
     .submit-final-text {
-      font-size: var(--font-medium);
+      font-size: var(--font-large);
       line-height: 1.15;
       color: white;
       font-weight: 500;
@@ -1530,6 +1531,9 @@
         right: calc(50% - 490px);
       }
 
+      .close-btn {
+        right: calc(50% - 490px);
+      }
 
       .text-block, .loading-text {
         font-size: var(--font-large);
@@ -1547,6 +1551,10 @@
         top: 48px;
       }
 
+      .close-btn {
+        top: 48px;
+      }
+
       .arrow-button {
         bottom: 48px;
       }
@@ -1556,6 +1564,11 @@
       }
 
       .save-button-container {
+        bottom: 48px;
+      }
+
+      .submit-next-btn,
+      .submit-start-btn {
         bottom: 48px;
       }
 
@@ -1580,7 +1593,7 @@
       :root {
         --font-large: 88px;
         --font-medium: 53px;
-        --font-small: 53px;
+        --font-small: 40px;
         --font-ui: 36px;
       }
     }
@@ -1658,7 +1671,12 @@
 
   <!-- Info panel -->
   <div class="info-panel" id="infoPanel">
-    <button class="btn-round btn-light close-btn visible" id="closeButtonInfo">✕</button>
+    <button class="btn-round btn-light close-btn visible" id="closeButtonInfo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M17.2809 19.4464C17.8789 20.0444 18.8484 20.0444 19.4464 19.4464C20.0444 18.8485 20.0444 17.8789 19.4464 17.2809L6.45335 4.28785C5.85536 3.68986 4.88583 3.68986 4.28784 4.28785C3.68985 4.88584 3.68985 5.85537 4.28784 6.45336L17.2809 19.4464Z" fill="white"/>
+        <path d="M19.4464 6.45345C20.0444 5.85546 20.0444 4.88593 19.4464 4.28794C18.8485 3.68995 17.8789 3.68995 17.2809 4.28794L4.28785 17.281C3.68986 17.879 3.68986 18.8485 4.28785 19.4465C4.88584 20.0445 5.85537 20.0445 6.45336 19.4465L19.4464 6.45345Z" fill="white"/>
+      </svg>
+    </button>
     <div class="info-content">
       <p>The Ritual Randomiser has been developed as part of Accept & Proceed’s wider explorations in how outdoor culture is changing — a piece of work called Beyond the Beaten Path.</p>
       <p>Each ritual draws from a growing ecosystem of perspectives, collected from the communities it touches. Ways of seeing and being in the world, recombined to reveal it in surprising light.</p>
@@ -1672,7 +1690,12 @@
 
   <!-- Contributors panel -->
   <div class="info-panel" id="contributorsPanel">
-    <button class="btn-round btn-light close-btn visible" id="closeButtonContrib">✕</button>
+    <button class="btn-round btn-light close-btn visible" id="closeButtonContrib">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M17.2809 19.4464C17.8789 20.0444 18.8484 20.0444 19.4464 19.4464C20.0444 18.8485 20.0444 17.8789 19.4464 17.2809L6.45335 4.28785C5.85536 3.68986 4.88583 3.68986 4.28784 4.28785C3.68985 4.88584 3.68985 5.85537 4.28784 6.45336L17.2809 19.4464Z" fill="white"/>
+        <path d="M19.4464 6.45345C20.0444 5.85546 20.0444 4.88593 19.4464 4.28794C18.8485 3.68995 17.8789 3.68995 17.2809 4.28794L4.28785 17.281C3.68986 17.879 3.68986 18.8485 4.28785 19.4465C4.88584 20.0445 5.85537 20.0445 6.45336 19.4465L19.4464 6.45345Z" fill="white"/>
+      </svg>
+    </button>
     <div class="info-content">
       <p class="contributors-title">Thank you to our Contributors</p>
       <p class="contributors-list" id="contributorsList"></p>
@@ -1769,7 +1792,12 @@
   <!-- Submit panels -->
   <!-- Step 1: Intro -->
   <div class="submit-panel" id="submitStep1">
-    <button class="btn-round btn-light close-btn visible" id="closeSubmit1">✕</button>
+    <button class="btn-round btn-light close-btn visible" id="closeSubmit1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M17.2809 19.4464C17.8789 20.0444 18.8484 20.0444 19.4464 19.4464C20.0444 18.8485 20.0444 17.8789 19.4464 17.2809L6.45335 4.28785C5.85536 3.68986 4.88583 3.68986 4.28784 4.28785C3.68985 4.88584 3.68985 5.85537 4.28784 6.45336L17.2809 19.4464Z" fill="white"/>
+        <path d="M19.4464 6.45345C20.0444 5.85546 20.0444 4.88593 19.4464 4.28794C18.8485 3.68995 17.8789 3.68995 17.2809 4.28794L4.28785 17.281C3.68986 17.879 3.68986 18.8485 4.28785 19.4465C4.88584 20.0445 5.85537 20.0445 6.45336 19.4465L19.4464 6.45345Z" fill="white"/>
+      </svg>
+    </button>
     <div class="submit-content">
       <p class="submit-intro-text">Please contribute a ritual of your own to help grow the randomiser</p>
     </div>
@@ -1790,12 +1818,21 @@
         <span class="submit-counter"><span id="counter2">0</span>/32</span>
       </div>
     </div>
-    <button class="btn-round submit-next-btn" id="submitNext2">→</button>
+    <button class="btn-round submit-next-btn" id="submitNext2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+        <path d="M1.55518 12.0556L22.5552 12.0556M22.5552 12.0556L16.7218 6.22228M22.5552 12.0556L16.7218 17.8889" stroke="white" stroke-width="2.72222" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
   </div>
 
   <!-- Step 3: Moment -->
   <div class="submit-panel" id="submitStep3">
-    <button class="btn-round btn-light close-btn visible" id="closeSubmit3">✕</button>
+    <button class="btn-round btn-light close-btn visible" id="closeSubmit3">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M17.2809 19.4464C17.8789 20.0444 18.8484 20.0444 19.4464 19.4464C20.0444 18.8485 20.0444 17.8789 19.4464 17.2809L6.45335 4.28785C5.85536 3.68986 4.88583 3.68986 4.28784 4.28785C3.68985 4.88584 3.68985 5.85537 4.28784 6.45336L17.2809 19.4464Z" fill="white"/>
+        <path d="M19.4464 6.45345C20.0444 5.85546 20.0444 4.88593 19.4464 4.28794C18.8485 3.68995 17.8789 3.68995 17.2809 4.28794L4.28785 17.281C3.68986 17.879 3.68986 18.8485 4.28785 19.4465C4.88584 20.0445 5.85537 20.0445 6.45336 19.4465L19.4464 6.45345Z" fill="white"/>
+      </svg>
+    </button>
     <div class="submit-content">
       <div class="submit-input-area">
         <div class="submit-text-wrapper">
@@ -1807,12 +1844,21 @@
         <span class="submit-counter"><span id="counter3">0</span>/32</span>
       </div>
     </div>
-    <button class="btn-round submit-next-btn" id="submitNext3">→</button>
+    <button class="btn-round submit-next-btn" id="submitNext3">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+        <path d="M1.55518 12.0556L22.5552 12.0556M22.5552 12.0556L16.7218 6.22228M22.5552 12.0556L16.7218 17.8889" stroke="white" stroke-width="2.72222" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
   </div>
 
   <!-- Step 4: Focus -->
   <div class="submit-panel" id="submitStep4">
-    <button class="btn-round btn-light close-btn visible" id="closeSubmit4">✕</button>
+    <button class="btn-round btn-light close-btn visible" id="closeSubmit4">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M17.2809 19.4464C17.8789 20.0444 18.8484 20.0444 19.4464 19.4464C20.0444 18.8485 20.0444 17.8789 19.4464 17.2809L6.45335 4.28785C5.85536 3.68986 4.88583 3.68986 4.28784 4.28785C3.68985 4.88584 3.68985 5.85537 4.28784 6.45336L17.2809 19.4464Z" fill="white"/>
+        <path d="M19.4464 6.45345C20.0444 5.85546 20.0444 4.88593 19.4464 4.28794C18.8485 3.68995 17.8789 3.68995 17.2809 4.28794L4.28785 17.281C3.68986 17.879 3.68986 18.8485 4.28785 19.4465C4.88584 20.0445 5.85537 20.0445 6.45336 19.4465L19.4464 6.45345Z" fill="white"/>
+      </svg>
+    </button>
     <div class="submit-content">
       <div class="submit-input-area">
         <div class="submit-text-wrapper">
@@ -1824,12 +1870,21 @@
         <span class="submit-counter"><span id="counter4">0</span>/32</span>
       </div>
     </div>
-    <button class="btn-round submit-next-btn" id="submitNext4">→</button>
+    <button class="btn-round submit-next-btn" id="submitNext4">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+        <path d="M1.55518 12.0556L22.5552 12.0556M22.5552 12.0556L16.7218 6.22228M22.5552 12.0556L16.7218 17.8889" stroke="white" stroke-width="2.72222" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
   </div>
 
   <!-- Step 5: Contributor -->
   <div class="submit-panel" id="submitStep5">
-    <button class="btn-round btn-light close-btn visible" id="closeSubmit5">✕</button>
+    <button class="btn-round btn-light close-btn visible" id="closeSubmit5">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M17.2809 19.4464C17.8789 20.0444 18.8484 20.0444 19.4464 19.4464C20.0444 18.8485 20.0444 17.8789 19.4464 17.2809L6.45335 4.28785C5.85536 3.68986 4.88583 3.68986 4.28784 4.28785C3.68985 4.88584 3.68985 5.85537 4.28784 6.45336L17.2809 19.4464Z" fill="white"/>
+        <path d="M19.4464 6.45345C20.0444 5.85546 20.0444 4.88593 19.4464 4.28794C18.8485 3.68995 17.8789 3.68995 17.2809 4.28794L4.28785 17.281C3.68986 17.879 3.68986 18.8485 4.28785 19.4465C4.88584 20.0445 5.85537 20.0445 6.45336 19.4465L19.4464 6.45345Z" fill="white"/>
+      </svg>
+    </button>
     <div class="submit-content">
       <div class="submit-input-area">
         <div class="submit-text-wrapper">
@@ -1841,12 +1896,21 @@
         <span class="submit-counter"><span id="counter5">0</span>/32</span>
       </div>
     </div>
-    <button class="btn-round submit-next-btn" id="submitNext5">→</button>
+    <button class="btn-round submit-next-btn" id="submitNext5">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+        <path d="M1.55518 12.0556L22.5552 12.0556M22.5552 12.0556L16.7218 6.22228M22.5552 12.0556L16.7218 17.8889" stroke="white" stroke-width="2.72222" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
   </div>
 
   <!-- Step 6: Thank you -->
   <div class="submit-panel" id="submitStep6">
-    <button class="btn-round btn-light close-btn visible" id="closeSubmit6">✕</button>
+    <button class="btn-round btn-light close-btn visible" id="closeSubmit6">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M17.2809 19.4464C17.8789 20.0444 18.8484 20.0444 19.4464 19.4464C20.0444 18.8485 20.0444 17.8789 19.4464 17.2809L6.45335 4.28785C5.85536 3.68986 4.88583 3.68986 4.28784 4.28785C3.68985 4.88584 3.68985 5.85537 4.28784 6.45336L17.2809 19.4464Z" fill="white"/>
+        <path d="M19.4464 6.45345C20.0444 5.85546 20.0444 4.88593 19.4464 4.28794C18.8485 3.68995 17.8789 3.68995 17.2809 4.28794L4.28785 17.281C3.68986 17.879 3.68986 18.8485 4.28785 19.4465C4.88584 20.0445 5.85537 20.0445 6.45336 19.4465L19.4464 6.45345Z" fill="white"/>
+      </svg>
+    </button>
     <div class="submit-content">
       <p class="submit-final-text">Now Go Outside</p>
     </div>
