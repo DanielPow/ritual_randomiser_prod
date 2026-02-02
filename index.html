@@ -1185,11 +1185,10 @@
       margin-top: 20px;
       padding: 12px 32px;
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 100px;
       color: white;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
       font-family: "Helvetica Neue", Arial, sans-serif;
       transition: all 0.2s ease;
@@ -2299,13 +2298,13 @@
       cameraCtx.putImageData(noiseData, 0, 0);
 
       // Continue loop
-      cameraAnimationId = requestAnimationFrame(() => processCameraFrame(video));
+      cameraAnimationId = requestAnimationFrame((ts) => processCameraFrame(video, ts));
     }
 
     function startCameraProcessing(video) {
       cameraProcessingActive = true;
       cameraCanvas.classList.add('active');
-      processCameraFrame(video);
+      cameraAnimationId = requestAnimationFrame((ts) => processCameraFrame(video, ts));
     }
 
     function stopCameraProcessing() {
@@ -3779,7 +3778,7 @@
         // Phone wallpaper dimensions
         const width = 1179;
         const height = 2556;
-        const paddingTop = 860;
+        const paddingTop = 940;
         const paddingSide = 110;
 
         // Create canvas
@@ -3960,7 +3959,7 @@
 
         // Ritual text settings
         const fontSize = 90;
-        const lineHeight = fontSize * 0.95;
+        const lineHeight = fontSize;
 
         // Helper to wrap and draw text with highlights
         function drawRitualLine(text, x, y, maxWidth, isRightAligned) {
@@ -3995,7 +3994,7 @@
             lineWords.forEach((word, wi) => {
               // First word of first line is highlighted (simplified)
               const isHighlight = (i === 0 && wi === 0);
-              ctx.fillStyle = isHighlight ? '#ffffff' : 'rgba(35, 30, 25, 0.95)';
+              ctx.fillStyle = isHighlight ? '#ffffff' : 'rgba(0, 0, 0, 1)';
               ctx.fillText(word, xPos, lineY);
               xPos += ctx.measureText(word + ' ').width;
             });
@@ -4012,14 +4011,14 @@
         currentY += drawRitualLine(ritualText3, paddingSide, currentY, maxWidth, false);
 
         // Draw branding below ritual text
-        currentY += 40; // Gap after ritual
-        ctx.fillStyle = 'rgba(35, 30, 25, 0.95)';
-        ctx.font = '500 42px "Helvetica Neue", Helvetica, Arial, sans-serif';
+        currentY += 2; // Gap after ritual
+        ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+        ctx.font = '400 48px "Helvetica Neue", Helvetica, Arial, sans-serif';
         ctx.fillText('Random Ritualiser', paddingSide, currentY);
-        currentY += 50;
+        currentY += 42;
 
-        ctx.fillStyle = 'rgba(35, 30, 25, 0.6)';
-        ctx.font = '500 42px "Helvetica Neue", Helvetica, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+        ctx.font = '400 48px "Helvetica Neue", Helvetica, Arial, sans-serif';
         ctx.fillText('by Accept & Proceed', paddingSide, currentY);
 
         // Convert to blob for sharing/saving
