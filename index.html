@@ -68,7 +68,7 @@
       --font-large: clamp(44px, 8.5vw, 88px);
       --font-medium: clamp(32px, 8.5vw, 53px);
       --font-small: clamp(28px, 6.6vw, 53px);
-      --font-ui: clamp(21px, 4.75vw, 36px);
+      --font-ui: clamp(18px, 4.75vw, 32px);
       --font-btn: 19px;
     }
 
@@ -242,7 +242,7 @@
       width: 100%;
       max-width: 100%;
       padding: 24px;
-      padding-top: calc((var(--font-ui)*2) + 48px); 
+      padding-top: calc((var(--font-ui)*2) + 52px); 
       position: fixed;
       top: 0;
       left: 0;
@@ -314,8 +314,8 @@
 
       @media (max-width: 600px) {
         .btn-round {
-          width: 63px;
-          height: 63px;
+          width: 44px;
+          height: 44px;
         }
       }
 
@@ -352,8 +352,8 @@
 
      @media (max-width: 600px) {
         .btn-pill {
-          height: 63px;
-          border-radius: 31.5px;
+          height: 44px;
+          border-radius: 22px;
         }
       }
 
@@ -473,8 +473,8 @@
 
     @media (max-width: 600px) {
       .save-button {
-        width: 63px;
-        height: 63px;
+        width: 44px;
+        height: 44px;
       }
     }
 
@@ -1579,7 +1579,7 @@
       .info-panel,
       .help-panel,
       .submit-panel {
-        padding-top: calc((var(--font-ui)*2) + 96px);
+          padding-top: calc((var(--font-ui)*2) + 52px); 
       }
 
       .info-panel,
@@ -1595,7 +1595,7 @@
         --font-large: 88px;
         --font-medium: 53px;
         --font-small: 40px;
-        --font-ui: 36px;
+        --font-ui: 32px;
       }
     }
   </style>
@@ -2117,20 +2117,45 @@
       addPixelNoise();
     }
 
+    // Static noise pattern (generated once)
+    let staticNoisePattern = null;
+    let noisePatternWidth = 0;
+    let noisePatternHeight = 0;
+
+    // Generate static noise pattern once
+    function generateStaticNoise(w, h) {
+      if (staticNoisePattern && noisePatternWidth === w && noisePatternHeight === h) {
+        return; // Already generated for this size
+      }
+      noisePatternWidth = w;
+      noisePatternHeight = h;
+      staticNoisePattern = new Float32Array(w * h);
+      const noiseIntensity = 12;
+      for (let i = 0; i < staticNoisePattern.length; i++) {
+        staticNoisePattern[i] = (Math.random() - 0.5) * noiseIntensity;
+      }
+    }
+
     // Add consistent pixel noise regardless of screen size
     function addPixelNoise() {
       const w = bgCanvas.width;
       const h = bgCanvas.height;
+
+      // Generate static noise if needed
+      generateStaticNoise(w, h);
+
       const imageData = bgCtx.getImageData(0, 0, w, h);
       const data = imageData.data;
 
-      const noiseIntensity = 12; // Subtle noise
-
-      for (let i = 0; i < data.length; i += 4) {
-        const noise = (Math.random() - 0.5) * noiseIntensity;
-        data[i] = Math.max(0, Math.min(255, data[i] + noise));
-        data[i + 1] = Math.max(0, Math.min(255, data[i + 1] + noise));
-        data[i + 2] = Math.max(0, Math.min(255, data[i + 2] + noise));
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const pixelIndex = y * w + x;
+          const dataIndex = pixelIndex * 4;
+          const noise = staticNoisePattern[pixelIndex];
+          data[dataIndex] = Math.max(0, Math.min(255, data[dataIndex] + noise));
+          data[dataIndex + 1] = Math.max(0, Math.min(255, data[dataIndex + 1] + noise));
+          data[dataIndex + 2] = Math.max(0, Math.min(255, data[dataIndex + 2] + noise));
+        }
       }
 
       bgCtx.putImageData(imageData, 0, 0);
@@ -2167,7 +2192,7 @@
 
       const width = window.innerWidth;
       const height = window.innerHeight;
-      const blurAmount = 24; // Same as save image
+      const blurAmount = 20;
 
       // Resize canvas if needed
       if (cameraCanvas.width !== width || cameraCanvas.height !== height) {
@@ -2192,28 +2217,10 @@
         offsetY = (height - drawHeight) / 2;
       }
 
-      // Step 1: Downscale for blur (same as save image)
-      const smallWidth = Math.floor(width / blurAmount);
-      const smallHeight = Math.floor(height / blurAmount);
-      const smallCanvas = document.createElement('canvas');
-      smallCanvas.width = smallWidth;
-      smallCanvas.height = smallHeight;
-      const smallCtx = smallCanvas.getContext('2d');
-
-      // Draw video to small canvas (downscale)
-      smallCtx.drawImage(video,
-        offsetX / blurAmount, offsetY / blurAmount,
-        drawWidth / blurAmount, drawHeight / blurAmount);
-
-      // Apply multiple passes for smoother blur
-      for (let i = 0; i < 2; i++) {
-        smallCtx.drawImage(smallCanvas, 0, 0);
-      }
-
-      // Step 2: Upscale to full resolution (creates blur effect)
-      cameraCtx.imageSmoothingEnabled = true;
-      cameraCtx.imageSmoothingQuality = 'high';
-      cameraCtx.drawImage(smallCanvas, 0, 0, width, height);
+      // Step 1: Draw video to canvas with blur filter
+      cameraCtx.filter = `blur(${blurAmount}px)`;
+      cameraCtx.drawImage(video, offsetX, offsetY, drawWidth, drawHeight);
+      cameraCtx.filter = 'none';
 
       // Step 3: Apply color mapping at full resolution (same as save image)
       const imageData = cameraCtx.getImageData(0, 0, width, height);
@@ -3646,8 +3653,8 @@
           const constraints = {
             video: {
               facingMode: { ideal: 'environment' },
-              width: { ideal: 1920 },
-              height: { ideal: 1080 }
+              width: { ideal: 640 },
+              height: { ideal: 480 }
             }
           };
 
@@ -3767,7 +3774,7 @@
           }
 
           // Use downscale-upscale blur (works on iOS Safari)
-          const blurAmount = 24; // Higher = less blur (more blur for saved image)
+          const blurAmount = 8; // Lower = more blur
           const smallWidth = Math.floor(width / blurAmount);
           const smallHeight = Math.floor(height / blurAmount);
 
