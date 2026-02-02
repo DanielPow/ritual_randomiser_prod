@@ -117,7 +117,6 @@
       height: 100%;
       z-index: -2;
       pointer-events: none;
-      filter: contrast(1.5);
     }
 
     /* Camera video background */
@@ -154,7 +153,7 @@
     }
 
     #cameraCanvas.active {
-      opacity: 0.85;
+      opacity: 1;
     }
 
     /* Dreamy overlay when camera is active */
@@ -314,8 +313,8 @@
 
       @media (max-width: 600px) {
         .btn-round {
-          width: 44px;
-          height: 44px;
+          width: 54px;
+          height: 54px;
         }
       }
 
@@ -352,8 +351,9 @@
 
      @media (max-width: 600px) {
         .btn-pill {
-          height: 44px;
-          border-radius: 22px;
+          height: 54px;
+          border-radius: 27px;
+          font-weight: 500 !important;
         }
       }
 
@@ -473,8 +473,9 @@
 
     @media (max-width: 600px) {
       .save-button {
-        width: 44px;
-        height: 44px;
+        width: 54px;
+        height: 54px;
+        line-height: 0.93;
       }
     }
 
@@ -980,7 +981,8 @@
 
     .submit-final-text {
       font-size: var(--font-large);
-      line-height: 1.15;
+      line-height: 0.94em;
+      letter-spacing: -0.04em;
       color: white;
       font-weight: 500;
     }
@@ -1430,8 +1432,8 @@
         gap: 8px;
       }
       .icon-btn {
-        width: 44px;
-        height: 44px;
+        width: 54px;
+        height: 54px;
         font-size: var(--font-btn);
       }
       
@@ -2094,7 +2096,10 @@
 
           // Normalize to 0-1 with contrast boost
           let t = (noiseVal + 1) / 2;
-          // S-curve for increased contrast (pushes values away from middle)
+          // Strong contrast boost to match webcam intensity
+          // Apply S-curve multiple times for stronger effect
+          t = t * t * (3 - 2 * t);
+          t = t * t * (3 - 2 * t);
           t = t * t * (3 - 2 * t);
 
           // Map to colors
@@ -2185,14 +2190,25 @@
     const cameraCtx = cameraCanvas.getContext('2d');
     let cameraAnimationId = null;
     let cameraProcessingActive = false;
+    let lastCameraFrame = 0;
+    const cameraFrameInterval = 50; // ~20fps to reduce CPU load
+    let smallCanvasCache = null;
+    let smallCtxCache = null;
 
     // Process camera frame with time-based color mapping (matches save image exactly)
-    function processCameraFrame(video) {
+    function processCameraFrame(video, timestamp) {
       if (!cameraProcessingActive) return;
+
+      // Throttle to ~20fps
+      if (timestamp - lastCameraFrame < cameraFrameInterval) {
+        cameraAnimationId = requestAnimationFrame((ts) => processCameraFrame(video, ts));
+        return;
+      }
+      lastCameraFrame = timestamp;
 
       const width = window.innerWidth;
       const height = window.innerHeight;
-      const blurAmount = 20;
+      const blurAmount = 80; // Lower = more blur (matches save image)
 
       // Resize canvas if needed
       if (cameraCanvas.width !== width || cameraCanvas.height !== height) {
@@ -2217,10 +2233,38 @@
         offsetY = (height - drawHeight) / 2;
       }
 
-      // Step 1: Draw video to canvas with blur filter
-      cameraCtx.filter = `blur(${blurAmount}px)`;
-      cameraCtx.drawImage(video, offsetX, offsetY, drawWidth, drawHeight);
-      cameraCtx.filter = 'none';
+      // Step 1: Downscale for blur (Safari compatible)
+      const smallWidth = Math.floor(width / blurAmount);
+      const smallHeight = Math.floor(height / blurAmount);
+
+      // Reuse cached canvas to avoid GC
+      if (!smallCanvasCache || smallCanvasCache.width !== smallWidth || smallCanvasCache.height !== smallHeight) {
+        smallCanvasCache = document.createElement('canvas');
+        smallCanvasCache.width = smallWidth;
+        smallCanvasCache.height = smallHeight;
+        smallCtxCache = smallCanvasCache.getContext('2d');
+        smallCtxCache.imageSmoothingEnabled = true;
+        smallCtxCache.imageSmoothingQuality = 'high';
+      }
+      const smallCanvas = smallCanvasCache;
+      const smallCtx = smallCtxCache;
+
+      // Draw video to small canvas (downscale) - apply cover scaling
+      const scaleX = smallWidth / width;
+      const scaleY = smallHeight / height;
+      smallCtx.drawImage(video,
+        offsetX * scaleX, offsetY * scaleY,
+        drawWidth * scaleX, drawHeight * scaleY);
+
+      // Multiple blur passes for smoother result
+      for (let i = 0; i < 3; i++) {
+        smallCtx.drawImage(smallCanvas, 0, 0, smallWidth, smallHeight);
+      }
+
+      // Step 2: Upscale to full resolution (creates blur effect)
+      cameraCtx.imageSmoothingEnabled = true;
+      cameraCtx.imageSmoothingQuality = 'high';
+      cameraCtx.drawImage(smallCanvas, 0, 0, width, height);
 
       // Step 3: Apply color mapping at full resolution (same as save image)
       const imageData = cameraCtx.getImageData(0, 0, width, height);
@@ -2230,7 +2274,11 @@
       for (let i = 0; i < data.length; i += 4) {
         // Convert to grayscale (luminance)
         const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
-        const t = gray / 255;
+        let t = gray / 255;
+
+        // Softer contrast - blend S-curve with linear for gentler effect
+        const curved = t * t * (3 - 2 * t);
+        t = t * 0.4 + curved * 0.6;
 
         // Map grayscale to time-based colors
         data[i] = blackColor[0] + (whiteColor[0] - blackColor[0]) * t;
@@ -3653,8 +3701,8 @@
           const constraints = {
             video: {
               facingMode: { ideal: 'environment' },
-              width: { ideal: 640 },
-              height: { ideal: 480 }
+              width: { ideal: 1920 },
+              height: { ideal: 1080 }
             }
           };
 
@@ -3774,7 +3822,7 @@
           }
 
           // Use downscale-upscale blur (works on iOS Safari)
-          const blurAmount = 8; // Lower = more blur
+          const blurAmount = 80; // Lower = more blur
           const smallWidth = Math.floor(width / blurAmount);
           const smallHeight = Math.floor(height / blurAmount);
 
@@ -3783,15 +3831,17 @@
           smallCanvas.width = smallWidth;
           smallCanvas.height = smallHeight;
           const smallCtx = smallCanvas.getContext('2d');
+          smallCtx.imageSmoothingEnabled = true;
+          smallCtx.imageSmoothingQuality = 'high';
 
           // Draw video to small canvas (downscale)
           smallCtx.drawImage(cameraVideo,
             offsetX / blurAmount, offsetY / blurAmount,
             drawWidth / blurAmount, drawHeight / blurAmount);
 
-          // Apply multiple passes for smoother blur
-          for (let i = 0; i < 2; i++) {
-            smallCtx.drawImage(smallCanvas, 0, 0);
+          // Multiple blur passes for smoother result
+          for (let i = 0; i < 3; i++) {
+            smallCtx.drawImage(smallCanvas, 0, 0, smallWidth, smallHeight);
           }
 
           // Draw small canvas to main canvas (upscale = blur effect)
@@ -3807,7 +3857,11 @@
           for (let i = 0; i < data.length; i += 4) {
             // Convert to grayscale (luminance)
             const gray = data[i] * 0.299 + data[i+1] * 0.587 + data[i+2] * 0.114;
-            const t = gray / 255;
+            let t = gray / 255;
+
+            // Softer contrast - blend S-curve with linear for gentler effect
+            const curved = t * t * (3 - 2 * t);
+            t = t * 0.4 + curved * 0.6;
 
             // Map grayscale to time-based colors
             data[i] = blackColor[0] + (whiteColor[0] - blackColor[0]) * t;
@@ -3850,18 +3904,25 @@
           const { blackColor, whiteColor } = getTimeColors();
 
           // Noise parameters (same as live background)
-          const noiseScale = 0.008;
-          const time = Date.now() * 0.00002;
+          const referenceSize = 390;
+          const scaleFactor = referenceSize / Math.min(width, height);
+          const noiseScale = 0.008 * scaleFactor;
 
-          // Generate noise and map to colors
+          // Generate noise and map to colors (static, no movement)
           for (let y = 0; y < h; y++) {
             for (let x = 0; x < w; x++) {
               let noiseVal = 0;
-              noiseVal += bgNoise(x * noiseScale + time, y * noiseScale) * 0.6;
-              noiseVal += bgNoise(x * noiseScale * 2 + time * 1.5, y * noiseScale * 2) * 0.3;
-              noiseVal += bgNoise(x * noiseScale * 4 + time * 2, y * noiseScale * 4) * 0.1;
+              noiseVal += bgNoise(x * noiseScale, y * noiseScale) * 0.6;
+              noiseVal += bgNoise(x * noiseScale * 2, y * noiseScale * 2) * 0.3;
+              noiseVal += bgNoise(x * noiseScale * 4, y * noiseScale * 4) * 0.1;
 
-              const t = (noiseVal + 1) / 2;
+              // Normalize to 0-1 with contrast boost
+              let t = (noiseVal + 1) / 2;
+              // Strong contrast boost to match webcam intensity
+              // Apply S-curve multiple times for stronger effect
+              t = t * t * (3 - 2 * t);
+              t = t * t * (3 - 2 * t);
+              t = t * t * (3 - 2 * t);
 
               const idx = (y * w + x) * 4;
               data[idx] = blackColor[0] + (whiteColor[0] - blackColor[0]) * t;
@@ -3899,7 +3960,7 @@
 
         // Ritual text settings
         const fontSize = 90;
-        const lineHeight = fontSize * 1.15;
+        const lineHeight = fontSize * 0.95;
 
         // Helper to wrap and draw text with highlights
         function drawRitualLine(text, x, y, maxWidth, isRightAligned) {
