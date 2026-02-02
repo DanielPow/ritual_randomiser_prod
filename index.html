@@ -2212,7 +2212,7 @@
 
       const width = window.innerWidth;
       const height = window.innerHeight;
-      const blurAmount = 50; // Lower = more blur (matches save image)
+      const blurAmount = 40; // Lower = more blur (matches save image)
 
       // Resize canvas if needed
       if (cameraCanvas.width !== width || cameraCanvas.height !== height) {
@@ -3871,7 +3871,9 @@
           }
 
           // Use downscale-upscale blur (works on iOS Safari)
-          const blurAmount = 50; // Lower = more blur
+          // Scale blur proportionally to match live camera appearance
+          const screenWidth = window.innerWidth;
+          const blurAmount = Math.round(40 * (width / screenWidth));
           const smallWidth = Math.floor(width / blurAmount);
           const smallHeight = Math.floor(height / blurAmount);
 
