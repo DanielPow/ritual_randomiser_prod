@@ -275,12 +275,12 @@
     }
 
     .highlight {
-      color: #ffffff !important;
+      color: #F5F5F5 !important;
       text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
     }
 
     .dark {
-      color: rgba(35, 30, 25, 0.95);
+      color: #2D2D2D;
     }
 
     /* ===========================================
@@ -292,10 +292,10 @@
     .btn-round {
       width: 50px;
       height: 50px;
-      background: rgba(45, 45, 45, 0.25);
+      background: rgba(45, 45, 45, 0.4);
       border: none;
       border-radius: 50%;
-      color: white;
+      color: #F5F5F5;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
@@ -313,13 +313,13 @@
 
       @media (max-width: 600px) {
         .btn-round {
-          width: 54px;
-          height: 54px;
+          width: 50px;
+          height: 50px;
         }
       }
 
     .btn-round:hover {
-      background: rgba(45, 45, 45, 0.8);
+      background: rgba(45, 45, 45, 0.7);
       transform: scale(1.05);
     }
 
@@ -333,10 +333,10 @@
     .btn-pill {
       height: 50px;
       padding: 0 25px;
-      background: rgba(45, 45, 45, 0.25);
+      background: rgba(45, 45, 45, 0.4);
       border: none;
       border-radius: 25px;
-      color: white;
+      color: #F5F5F5;
       font-size: var(--font-btn);
       font-family: "Helvetica Neue", Arial, sans-serif;
       font-weight: 500;
@@ -351,14 +351,14 @@
 
      @media (max-width: 600px) {
         .btn-pill {
-          height: 54px;
-          border-radius: 27px;
+          height: 50px;
+          border-radius: 25px;
           font-weight: 500 !important;
         }
       }
 
     .btn-pill:hover {
-     background: rgba(45, 45, 45, 0.8);
+     background: rgba(45, 45, 45, 0.7);
       transform: scale(1.05);
     }
 
@@ -370,11 +370,11 @@
 
     /* Lighter variant for buttons on dark backgrounds */
     .btn-light {
-      background: rgba(45, 45, 45, 0.25);
+      background: rgba(45, 45, 45, 0.4);
     }
 
     .btn-light:hover {
-      background: rgba(40, 35, 30, 1);
+      background: #2D2D2D;
     }
 
     /* ===========================================
@@ -433,7 +433,7 @@
 
 
     .icon-btn.active {
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(245, 245, 245, 0.8);
       color: #2D2D2D;
       stroke:  #2D2D2D;
     }
@@ -473,8 +473,8 @@
 
     @media (max-width: 600px) {
       .save-button {
-        width: 54px;
-        height: 54px;
+        width: 50px;
+        height: 50px;
         line-height: 0.93;
       }
     }
@@ -503,7 +503,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: white;
+      background: #F5F5F5;
       opacity: 0;
       pointer-events: none;
       z-index: 200;
@@ -600,7 +600,7 @@
       font-size: inherit;
       font-weight: inherit;
       font-family: inherit;
-      color: white;
+      color: #F5F5F5;
       pointer-events: none;
       z-index: 50;
       transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
@@ -629,7 +629,7 @@
       font-size: inherit;
       font-weight: inherit;
       font-family: inherit;
-      color: rgba(35, 30, 25, 0.95);
+      color: #2D2D2D;
       pointer-events: none;
       z-index: 49;
       transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
@@ -764,7 +764,7 @@
       display: inline-block;
       width: 2px;
       height: 1em;
-      background: white;
+      background: #F5F5F5;
       margin-left: 2px;
       animation: blink 0.7s infinite;
       vertical-align: text-bottom;
@@ -788,7 +788,7 @@
 
     .effect-label {
       font-size: 10px;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(245, 245, 245, 0.4);
       font-family: "Helvetica Neue", Arial, sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -803,11 +803,11 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.05);
-      color: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(245, 245, 245, 0.3);
+      background: rgba(245, 245, 245, 0.05);
+      color: rgba(245, 245, 245, 0.5);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 500;
       font-family: "Helvetica Neue", Arial, sans-serif;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -817,14 +817,14 @@
     }
 
     .effect-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: rgba(255, 255, 255, 0.8);
+      background: rgba(245, 245, 245, 0.15);
+      color: rgba(245, 245, 245, 0.8);
     }
 
     .effect-btn.active {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.5);
-      color: white;
+      background: rgba(245, 245, 245, 0.2);
+      border-color: rgba(245, 245, 245, 0.5);
+      color: #F5F5F5;
     }
 
     @media (max-width: 600px) {
@@ -877,7 +877,7 @@
       font-size: var(--font-large);
        line-height: 0.94em;
       letter-spacing: -0.04em;
-      color: rgba(40, 35, 30, 0.9);
+      color: rgba(45, 45, 45, 1);
       font-weight: 500;
     }
 
@@ -894,15 +894,15 @@
     }
 
     .submit-prefix {
-      color: rgba(40, 35, 30, 0.95);
+      color: #2D2D2D;
     }
 
     .submit-input {
-      color: rgba(40, 35, 30, 0.95);
+      color: #2D2D2D;
       outline: none;
       min-width: 2px;
       display: inline;
-      caret-color: rgba(40, 35, 30, 0.95);
+      caret-color: #2D2D2D;
       white-space: pre-wrap;
       word-spacing: normal;
       -webkit-user-modify: read-write-plaintext-only;
@@ -910,16 +910,16 @@
 
     .submit-input:empty::before {
       content: attr(data-placeholder);
-      color: rgba(40, 35, 30, 0.3);
+      color: rgba(45, 45, 45, 0.4);
     }
 
     .submit-input:focus {
-      caret-color: rgba(40, 35, 30, 0.95);
+      caret-color: #2D2D2D;
     }
 
     .submit-input:focus:empty::before {
       content: attr(data-placeholder);
-      color: rgba(40, 35, 30, 0.3);
+      color: rgba(45, 45, 45, 0.4);
     }
 
     /* Blinking cursor effect */
@@ -933,7 +933,7 @@
       display: inline-block;
       width: 1px;
       height: 1.1em;
-      background: rgba(40, 35, 30, 0.95);
+      background: #2D2D2D;
       animation: blink-cursor 1s step-end infinite;
       position: absolute;
       left: 0;
@@ -983,7 +983,7 @@
       font-size: var(--font-large);
       line-height: 0.94em;
       letter-spacing: -0.04em;
-      color: white;
+      color: #F5F5F5;
       font-weight: 500;
     }
 
@@ -1026,14 +1026,14 @@
 
     .modal-title {
       font-size: 18px;
-      color: white;
+      color: #F5F5F5;
       margin-bottom: 8px;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     .modal-subtitle {
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(245, 245, 245, 0.6);
       margin-bottom: 24px;
       font-family: "Helvetica Neue", Arial, sans-serif;
       line-height: 1.4;
@@ -1046,7 +1046,7 @@
     .form-label {
       display: block;
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(245, 245, 245, 0.5);
       margin-bottom: 6px;
       font-family: "Helvetica Neue", Arial, sans-serif;
       text-transform: uppercase;
@@ -1056,10 +1056,10 @@
     .form-input {
       width: 100%;
       padding: 12px 14px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(245, 245, 245, 0.1);
+      border: 1px solid rgba(245, 245, 245, 0.2);
       border-radius: 8px;
-      color: white;
+      color: #F5F5F5;
       font-size: var(--font-ui);
       font-family: "Helvetica Neue", Arial, sans-serif;
       outline: none;
@@ -1068,12 +1068,12 @@
     }
 
     .form-input:focus {
-      border-color: rgba(255, 255, 255, 0.4);
-      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(245, 245, 245, 0.4);
+      background: rgba(245, 245, 245, 0.15);
     }
 
     .form-input::placeholder {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(245, 245, 245, 0.3);
     }
 
     .modal-buttons {
@@ -1087,7 +1087,7 @@
       padding: 12px 20px;
       border-radius: 100px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
       font-family: "Helvetica Neue", Arial, sans-serif;
       transition: all 0.2s ease;
@@ -1095,16 +1095,16 @@
 
     .modal-btn-cancel {
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(245, 245, 245, 0.3);
+      color: rgba(245, 245, 245, 0.7);
     }
 
     .modal-btn-cancel:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(245, 245, 245, 0.1);
     }
 
     .modal-btn-submit {
-      background: white;
+      background: #F5F5F5;
       border: none;
       color: #333;
     }
@@ -1130,7 +1130,7 @@
 
     .modal-success-text {
       font-size: var(--font-ui);
-      color: white;
+      color: #F5F5F5;
       font-family: "Helvetica Neue", Arial, sans-serif;
     }
 
@@ -1159,7 +1159,7 @@
     }
 
     .image-preview-hint {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(245, 245, 245, 0.7);
       font-size: 14px;
       font-family: "Helvetica Neue", Arial, sans-serif;
       margin-bottom: 16px;
@@ -1184,9 +1184,9 @@
     .image-preview-close {
       margin-top: 20px;
       padding: 12px 32px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(245, 245, 245, 0.1);
       border-radius: 100px;
-      color: white;
+      color: #F5F5F5;
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
@@ -1195,7 +1195,7 @@
     }
 
     .image-preview-close:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(245, 245, 245, 0.2);
     }
 
     /* Landing screen */
@@ -1266,7 +1266,7 @@
     .loading-description {
       font-size: var(--font-medium);
       line-height: 1.15;
-      color: rgba(40, 35, 30, 0.9);
+      color: rgba(45, 45, 45, 1);
       margin-bottom: 0.5em;
       font-weight: 500;
     }
@@ -1274,7 +1274,7 @@
     .loading-status {
       font-size: var(--font-medium);
       line-height: 1.15;
-      color: white;
+      color: #F5F5F5;
       font-weight: 500;
       animation: pulse 2s ease-in-out infinite;
     }
@@ -1344,7 +1344,7 @@
 
     .contributors-list {
        font-size: var(--font-large) !important;
-      color: white !important;
+      color: #F5F5F5 !important;
     }
 
     /* Help panel */
@@ -1376,14 +1376,14 @@
 
     /* Icon button states */
     .icon-btn.active {
-      background: rgba(255, 255, 255, 0.9);
-      color: rgba(40, 35, 30, 0.9);
+      background: rgba(245, 245, 245, 0.9);
+      color: rgba(45, 45, 45, 1);
     }
 
     /* Arrow button home state */
     .arrow-button .arrow-icon {
       display: block;
-      font-weight: 400 !important;
+      font-weight: 500 !important;
     }
 
     .arrow-button .home-icon {
@@ -1418,7 +1418,7 @@
       bottom: 80px;
       left: 24px;
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(245, 245, 245, 0.4);
       font-family: "Helvetica Neue", Arial, sans-serif;
       z-index: 10;
     }
@@ -1431,8 +1431,8 @@
         gap: 8px;
       }
       .icon-btn {
-        width: 54px;
-        height: 54px;
+        width: 50px;
+        height: 50px;
         font-size: var(--font-btn);
       }
       
@@ -2193,6 +2193,11 @@
     const cameraFrameInterval = 50; // ~20fps to reduce CPU load
     let smallCanvasCache = null;
     let smallCtxCache = null;
+    let prevFrameCanvas = null;
+    let prevFrameCtx = null;
+    let tempFrameCanvas = null;
+    let tempFrameCtx = null;
+    const frameBlendAmount = 0.4; // How much of new frame to show (lower = smoother transitions)
 
     // Process camera frame with time-based color mapping (matches save image exactly)
     function processCameraFrame(video, timestamp) {
@@ -2207,7 +2212,7 @@
 
       const width = window.innerWidth;
       const height = window.innerHeight;
-      const blurAmount = 80; // Lower = more blur (matches save image)
+      const blurAmount = 50; // Lower = more blur (matches save image)
 
       // Resize canvas if needed
       if (cameraCanvas.width !== width || cameraCanvas.height !== height) {
@@ -2277,7 +2282,7 @@
 
         // Softer contrast - blend S-curve with linear for gentler effect
         const curved = t * t * (3 - 2 * t);
-        t = t * 0.4 + curved * 0.6;
+        t = t * 0.6 + curved * 0.4;
 
         // Map grayscale to time-based colors
         data[i] = blackColor[0] + (whiteColor[0] - blackColor[0]) * t;
@@ -2296,6 +2301,32 @@
         nData[i + 2] = Math.max(0, Math.min(255, nData[i + 2] + noise));
       }
       cameraCtx.putImageData(noiseData, 0, 0);
+
+      // Step 5: Blend with previous frame for smoother transitions
+      // Initialize/resize canvases if needed
+      if (!prevFrameCanvas || prevFrameCanvas.width !== width || prevFrameCanvas.height !== height) {
+        prevFrameCanvas = document.createElement('canvas');
+        prevFrameCanvas.width = width;
+        prevFrameCanvas.height = height;
+        prevFrameCtx = prevFrameCanvas.getContext('2d');
+        tempFrameCanvas = document.createElement('canvas');
+        tempFrameCanvas.width = width;
+        tempFrameCanvas.height = height;
+        tempFrameCtx = tempFrameCanvas.getContext('2d');
+        // First frame - just copy current to prev
+        prevFrameCtx.drawImage(cameraCanvas, 0, 0);
+      } else {
+        // Copy current frame to temp buffer
+        tempFrameCtx.drawImage(cameraCanvas, 0, 0);
+        // Draw prev frame as base
+        cameraCtx.drawImage(prevFrameCanvas, 0, 0);
+        // Blend current frame on top
+        cameraCtx.globalAlpha = frameBlendAmount;
+        cameraCtx.drawImage(tempFrameCanvas, 0, 0);
+        cameraCtx.globalAlpha = 1;
+        // Update prev frame buffer
+        prevFrameCtx.drawImage(cameraCanvas, 0, 0);
+      }
 
       // Continue loop
       cameraAnimationId = requestAnimationFrame((ts) => processCameraFrame(video, ts));
@@ -2414,20 +2445,36 @@
     // Row 1 (left): "Visit [place]"
     // Row 2 (right): "Take a moment to [activity]"
     // Row 3 (left): "focus on [details]"
+    // Helper to split text so last word + punctuation stay together
+    function splitWithPunctuation(prefix, text, punctuation) {
+      const words = text.trim().split(' ');
+      if (words.length <= 1) {
+        // Single word - keep it all together
+        return [{ text: prefix + text + punctuation, isHighlight: false, nowrap: true }];
+      }
+      // Multiple words - separate last word + punctuation
+      const lastWord = words.pop();
+      const leadingWords = words.join(' ');
+      return [
+        { text: prefix + leadingWords + ' ', isHighlight: false },
+        { text: lastWord + punctuation, isHighlight: false, nowrap: true }
+      ];
+    }
+
     function getRowContent(a, b, c) {
       return {
         row1: [
           { text: 'Visit', isHighlight: true },
-          { text: ' ' + a + '.', isHighlight: false }
+          ...splitWithPunctuation(' ', a, '.')
         ],
         row2: [
           { text: 'Take a ', isHighlight: false },
           { text: 'moment', isHighlight: true },
-          { text: ' to ' + b + ',', isHighlight: false }
+          ...splitWithPunctuation(' to ', b, ',')
         ],
         row3: [
           { text: 'focus', isHighlight: true },
-          { text: ' on ' + c + '.', isHighlight: false }
+          ...splitWithPunctuation(' on ', c, '.')
         ]
       };
     }
@@ -2438,6 +2485,9 @@
       words.forEach(word => {
         const span = document.createElement('span');
         span.className = 'word ' + (word.isHighlight ? 'highlight' : 'dark');
+        if (word.nowrap) {
+          span.style.whiteSpace = 'nowrap';
+        }
         span.textContent = word.text;
         rowEl.appendChild(span);
       });
@@ -3821,7 +3871,7 @@
           }
 
           // Use downscale-upscale blur (works on iOS Safari)
-          const blurAmount = 80; // Lower = more blur
+          const blurAmount = 50; // Lower = more blur
           const smallWidth = Math.floor(width / blurAmount);
           const smallHeight = Math.floor(height / blurAmount);
 
@@ -3860,7 +3910,7 @@
 
             // Softer contrast - blend S-curve with linear for gentler effect
             const curved = t * t * (3 - 2 * t);
-            t = t * 0.4 + curved * 0.6;
+            t = t * 0.6 + curved * 0.4;
 
             // Map grayscale to time-based colors
             data[i] = blackColor[0] + (whiteColor[0] - blackColor[0]) * t;
@@ -3994,7 +4044,7 @@
             lineWords.forEach((word, wi) => {
               // First word of first line is highlighted (simplified)
               const isHighlight = (i === 0 && wi === 0);
-              ctx.fillStyle = isHighlight ? '#ffffff' : 'rgba(0, 0, 0, 1)';
+              ctx.fillStyle = isHighlight ? '#F5F5F5' : '#2D2D2D';
               ctx.fillText(word, xPos, lineY);
               xPos += ctx.measureText(word + ' ').width;
             });
@@ -4012,12 +4062,12 @@
 
         // Draw branding below ritual text
         currentY += 2; // Gap after ritual
-        ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+        ctx.fillStyle = '#2D2D2D';
         ctx.font = '400 48px "Helvetica Neue", Helvetica, Arial, sans-serif';
         ctx.fillText('Random Ritualiser', paddingSide, currentY);
         currentY += 42;
 
-        ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+        ctx.fillStyle = '#2D2D2D';
         ctx.font = '400 48px "Helvetica Neue", Helvetica, Arial, sans-serif';
         ctx.fillText('by Accept & Proceed', paddingSide, currentY);
 
