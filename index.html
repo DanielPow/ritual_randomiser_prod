@@ -1684,7 +1684,7 @@
       <p>Each ritual draws from a growing ecosystem of perspectives, collected from the communities it touches. Ways of seeing and being in the world, recombined to reveal it in surprising light.</p>
       <p>Access Beyond the Beaten Path here:</p>
       <div class="info-buttons">
-        <a href="https://acceptandproceed.com/beyond-the-beaten-path" target="_blank" class="btn-pill btn-light info-btn">Full Report</a>
+        <a href="https://www.figma.com/proto/aNnbGPTxeUglhw3UQaZSN0/Beyond-The-Beaten-Path?page-id=0%3A1&node-id=1-31&p=f&viewport=-2060%2C83%2C0.1&t=ADSiJqGToNITnzkY-1&scaling=scale-down-width&content-scaling=fixed" target="_blank" class="btn-pill btn-light info-btn">Full Report</a>
         <button class="btn-pill btn-light info-btn" id="contributorsButton">Contributors</button>
       </div>
     </div>
@@ -2212,7 +2212,7 @@
 
       const width = window.innerWidth;
       const height = window.innerHeight;
-      const blurAmount = 30; // Lower = more blur (matches save image)
+      const blurAmount = 40; // Lower = more blur (matches save image)
 
       // Resize canvas if needed
       if (cameraCanvas.width !== width || cameraCanvas.height !== height) {
@@ -2665,7 +2665,7 @@
 
     async function autoStartRitual() {
       const startTime = Date.now();
-      const minDuration = 2500; // Minimum 2.5 seconds on landing
+      const minDuration = 5000; // Minimum 5 seconds on landing
 
       // Fetch data if not already loaded
       if (words.colA.length === 0) {
@@ -3873,7 +3873,7 @@
           // Use downscale-upscale blur (works on iOS Safari)
           // Scale blur proportionally to match live camera appearance
           const screenWidth = window.innerWidth;
-          const blurAmount = Math.round(30 * (width / screenWidth));
+          const blurAmount = Math.round(40 * (width / screenWidth));
           const smallWidth = Math.floor(width / blurAmount);
           const smallHeight = Math.floor(height / blurAmount);
 
@@ -4065,12 +4065,12 @@
         // Draw branding below ritual text
         currentY += 2; // Gap after ritual
         ctx.fillStyle = '#2D2D2D';
-        ctx.font = '400 48px "Helvetica Neue", Helvetica, Arial, sans-serif';
+        ctx.font = '500 48px "Helvetica Neue", Helvetica, Arial, sans-serif';
         ctx.fillText('Random Ritualiser', paddingSide, currentY);
         currentY += 42;
 
         ctx.fillStyle = '#2D2D2D';
-        ctx.font = '400 48px "Helvetica Neue", Helvetica, Arial, sans-serif';
+        ctx.font = '500 48px "Helvetica Neue", Helvetica, Arial, sans-serif';
         ctx.fillText('by Accept & Proceed', paddingSide, currentY);
 
         // Convert to blob for sharing/saving
