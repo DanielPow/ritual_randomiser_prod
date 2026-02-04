@@ -2212,7 +2212,7 @@
 
       const width = window.innerWidth;
       const height = window.innerHeight;
-      const blurAmount = 40; // Lower = more blur (matches save image)
+      const blurAmount = 25; // Lower = more blur (matches save image)
 
       // Resize canvas if needed
       if (cameraCanvas.width !== width || cameraCanvas.height !== height) {
@@ -2261,14 +2261,17 @@
         drawWidth * scaleX, drawHeight * scaleY);
 
       // Multiple blur passes for smoother result
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 10; i++) {
         smallCtx.drawImage(smallCanvas, 0, 0, smallWidth, smallHeight);
       }
 
       // Step 2: Upscale to full resolution (creates blur effect)
       cameraCtx.imageSmoothingEnabled = true;
       cameraCtx.imageSmoothingQuality = 'high';
+      // Apply canvas filter blur to smooth pixelated edges
+      cameraCtx.filter = 'blur(30px)';
       cameraCtx.drawImage(smallCanvas, 0, 0, width, height);
+      cameraCtx.filter = 'none';
 
       // Step 3: Apply color mapping at full resolution (same as save image)
       const imageData = cameraCtx.getImageData(0, 0, width, height);
@@ -3491,7 +3494,7 @@
           span.className = 'letter';
           span.textContent = char;
           span.style.opacity = '0';
-          span.style.filter = 'blur(8px)';
+          span.style.filter = 'blur(30px)';
           span.style.transition = 'opacity 0.3s linear, filter 0.8s linear';
           span.style.display = 'inline';
           el.appendChild(span);
@@ -3873,7 +3876,7 @@
           // Use downscale-upscale blur (works on iOS Safari)
           // Scale blur proportionally to match live camera appearance
           const screenWidth = window.innerWidth;
-          const blurAmount = Math.round(40 * (width / screenWidth));
+          const blurAmount = Math.round(25 * (width / screenWidth));
           const smallWidth = Math.floor(width / blurAmount);
           const smallHeight = Math.floor(height / blurAmount);
 
@@ -3891,14 +3894,18 @@
             drawWidth / blurAmount, drawHeight / blurAmount);
 
           // Multiple blur passes for smoother result
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < 10; i++) {
             smallCtx.drawImage(smallCanvas, 0, 0, smallWidth, smallHeight);
           }
 
           // Draw small canvas to main canvas (upscale = blur effect)
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
+          // Apply canvas filter blur to smooth pixelated edges (scale proportionally to output size)
+          const blurPx = Math.round(40 * (width / screenWidth));
+          ctx.filter = `blur(${blurPx}px)`;
           ctx.drawImage(smallCanvas, 0, 0, width, height);
+          ctx.filter = 'none';
 
           // Apply time-based color mapping (same as live camera)
           const imageData = ctx.getImageData(0, 0, width, height);
